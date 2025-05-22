@@ -1134,6 +1134,10 @@ pub mod ffi
         fn DCRTPolySerializePublicKeyToFile(publicKeyLocation: &CxxString,
                                             publicKey: &PublicKeyDCRTPoly,
                                             serialMode: SerialMode) -> bool;
+        
+        fn DCRTPolyDeserializePublicKeyFromString( publicKey: Pin<&mut PublicKeyDCRTPoly>,json: &CxxString );
+        
+        fn DCRTPolySerializePublicKeyToString(publicKey: &PublicKeyDCRTPoly) -> UniquePtr<CxxString>;
 
         // PrivateKey
         fn DCRTPolyDeserializePrivateKeyFromFile(privateKeyLocation: &CxxString,
