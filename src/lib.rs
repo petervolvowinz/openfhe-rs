@@ -100,7 +100,7 @@ pub mod ffi
         NOISE_FLOODING_HRA,
     }
 
-    #[repr(i32)]
+    /*#[repr(i32)]
     enum ScalingTechnique
     {
         FIXEDMANUAL = 0,
@@ -108,7 +108,19 @@ pub mod ffi
         FLEXIBLEAUTO,
         FLEXIBLEAUTOEXT,
         NORESCALE,
-        INVALID_RS_TECHNIQUE,
+       -> PublicKeyDCRTPoly INVALID_RS_TECHNIQUE,
+    }*/
+
+    #[repr(i32)]
+    enum ScalingTechnique {
+        FIXEDMANUAL = 0,
+        FIXEDAUTO,
+        FLEXIBLEAUTO,
+        FLEXIBLEAUTOEXT,
+        COMPOSITESCALINGAUTO,
+        COMPOSITESCALINGMANUAL,
+        NORESCALE,
+        INVALID_RS_TECHNIQUE,  // TODO (dsuponit): make this the first value
     }
 
     #[repr(i32)]
@@ -192,7 +204,6 @@ pub mod ffi
         type SecretKeyDist;
         type SecurityLevel;
         type SerialMode;
-
         // types
         type CiphertextDCRTPoly;
         type CryptoContextDCRTPoly;
@@ -1138,6 +1149,10 @@ pub mod ffi
         fn DCRTPolyDeserializePublicKeyFromString( publicKey: Pin<&mut PublicKeyDCRTPoly>,json: &CxxString );
         
         fn DCRTPolySerializePublicKeyToString(publicKey: &PublicKeyDCRTPoly) -> UniquePtr<CxxString>;
+
+        fn DCRTPolyDeserializeCiphertextFromString(cipherText : Pin<& mut CiphertextDCRTPoly>,json: &CxxString);
+        
+        fn DCRTPolySerializeCiphertextToString(cipherText : &CiphertextDCRTPoly) -> UniquePtr<CxxString>;
 
         // PrivateKey
         fn DCRTPolyDeserializePrivateKeyFromFile(privateKeyLocation: &CxxString,

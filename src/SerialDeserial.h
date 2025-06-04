@@ -56,14 +56,21 @@ class PublicKeyDCRTPoly;
 [[nodiscard]] bool DCRTPolySerializePublicKeyToFile(const std::string& publicKeyLocation,
     const PublicKeyDCRTPoly& publicKey, const SerialMode serialMode);
 
-void DCRTPolyDeserializePublicKeyFromString(
-    PublicKeyDCRTPoly& publicKey,const std::string& json);
-[[nodiscard]] std::unique_ptr<std::string> DCRTPolySerializePublicKeyToString(
-    const PublicKeyDCRTPoly& publicKey);
+
 
 [[nodiscard]] bool DCRTPolyDeserializePrivateKeyFromFile(const std::string& privateKeyLocation,
     PrivateKeyDCRTPoly& privateKey, const SerialMode serialMode);
 [[nodiscard]] bool DCRTPolySerializePrivateKeyToFile(const std::string& privateKeyLocation,
     const PrivateKeyDCRTPoly& cryptoContext, const SerialMode serialMode);
+
+// Peter Winzell, String serialization
+void DCRTPolyDeserializePublicKeyFromString(
+    PublicKeyDCRTPoly& publicKey,const std::string& json);
+[[nodiscard]] std::unique_ptr<std::string> DCRTPolySerializePublicKeyToString(
+    const PublicKeyDCRTPoly& publicKey);
+
+
+void DCRTPolyDeserializeCiphertextFromString(CiphertextDCRTPoly& ciphertext, const std::string& json);
+[[nodiscard]] std::unique_ptr<std::string> DCRTPolySerializeCiphertextToString(const CiphertextDCRTPoly& ciphertext);
 
 } // openfhe
