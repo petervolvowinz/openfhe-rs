@@ -65,12 +65,15 @@ class PublicKeyDCRTPoly;
 
 // Peter Winzell, String serialization
 void DCRTPolyDeserializePublicKeyFromString(
-    PublicKeyDCRTPoly& publicKey,const std::string& json);
+    PublicKeyDCRTPoly& publicKey, const std::string& json);
 [[nodiscard]] std::unique_ptr<std::string> DCRTPolySerializePublicKeyToString(
     const PublicKeyDCRTPoly& publicKey);
 
+[[nodiscard]] std::unique_ptr<std::string> DCRTPolySerializeEvalMultKeysToString(const CryptoContextDCRTPoly& cryptoContext);
+void DCRTPolyDeserializeEvalMultKeysFromString(const CryptoContextDCRTPoly& cryptoContext,const std::string& json);
 
 void DCRTPolyDeserializeCiphertextFromString(CiphertextDCRTPoly& ciphertext, const std::string& json);
 [[nodiscard]] std::unique_ptr<std::string> DCRTPolySerializeCiphertextToString(const CiphertextDCRTPoly& ciphertext);
+
 
 } // openfhe

@@ -1,7 +1,7 @@
 #include "SerialDeserial.h"
 
+#include "openfhe/pke/openfhe.h"
 #include "openfhe/pke/cryptocontext-ser.h"
-
 #include "Ciphertext.h"
 #include "CryptoContext.h"
 #include "PrivateKey.h"
@@ -21,6 +21,9 @@ void DeserializeFromString(Object& object,const std::string& json){
 }
 
 /*
+SerialDeserial<lbcrypto::SerType::SERJSON, std::ostream, std::ofstream>(
+            multKeyLocation, CryptoContextImpl::SerializeEvalMultKey, cryptoContext.GetRef());
+
 template <typename ST, typename Object>
 [[nodiscard]] bool SerialDeserial(const std::string& location,
     bool (* const funcPtr) (const std::string&, Object&, const ST&), Object& object)
@@ -280,6 +283,22 @@ void DCRTPolyDeserializeCiphertextFromString(CiphertextDCRTPoly& ciphertext,cons
 
 [[nodiscard]] std::unique_ptr<std::string> DCRTPolySerializeCiphertextToString(const CiphertextDCRTPoly& ciphertext){
     return std::make_unique<std::string>(SerialToString(ciphertext));
+}
+
+[[nodiscard]] std::unique_ptr<std::string> DCRTPolySerializeEvalMultKeysToString(const CryptoContextDCRTPoly& cryptoContext){
+     std::stringstream serstream;
+     const std::shared_ptr<CryptoContextImpl>& obj = cryptoContext.GetRef();
+     if (!CryptoContextImpl::SerializeEvalMultKey(serstream,lbcrypto::SerType::JSON,obj)) {
+             throw std::runtime_error("Failed to serialize EvalMultKey");
+     }
+     return std::make_unique<std::string>(serstream.str());
+}
+
+void DCRTPolyDeserializeEvalMultKeysFromString(const CryptoContextDCRTPoly& cryptoContext,const std::string& evalkeys){
+   std::stringstream serstream(evalkeys);
+   if (!CryptoContextImpl::DeserializeEvalMultKey(serstream,lbcrypto::SerType::JSON)){
+    throw std::runtime_error("Failed to deserialize EvalMultKey");
+   }
 }
 
 } // openfhe

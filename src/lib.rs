@@ -1153,6 +1153,10 @@ pub mod ffi
         fn DCRTPolyDeserializeCiphertextFromString(cipherText : Pin<& mut CiphertextDCRTPoly>,json: &CxxString);
         
         fn DCRTPolySerializeCiphertextToString(cipherText : &CiphertextDCRTPoly) -> UniquePtr<CxxString>;
+        
+        fn DCRTPolySerializeEvalMultKeysToString(cryptoContext: &CryptoContextDCRTPoly) -> UniquePtr<CxxString>;
+        
+        fn DCRTPolyDeserializeEvalMultKeysFromString(cryptoContext: &CryptoContextDCRTPoly,json: &CxxString);
 
         // PrivateKey
         fn DCRTPolyDeserializePrivateKeyFromFile(privateKeyLocation: &CxxString,
