@@ -2,6 +2,7 @@
 
 #include "openfhe/pke/openfhe.h"
 #include "openfhe/pke/cryptocontext-ser.h"
+#include "openfhe/pke/key/key-ser.h"
 #include "Ciphertext.h"
 #include "CryptoContext.h"
 #include "PrivateKey.h"
