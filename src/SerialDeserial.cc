@@ -11,15 +11,6 @@
 namespace openfhe
 {
 
-template <typename Object>
-[[nodiscard]] const std::string SerialToString(const Object& object){
-    return lbcrypto::Serial::SerializeToString(object.GetRef());
-}
-
-template <typename Object>
-void DeserializeFromString(Object& object,const std::string& json){
-    lbcrypto::Serial::DeserializeFromString(object.GetRef(),json);
-}
 
 /*
 SerialDeserial<lbcrypto::SerType::SERJSON, std::ostream, std::ofstream>(
@@ -266,6 +257,18 @@ bool DCRTPolySerializePrivateKeyToFile(const std::string& privateKeyLocation,
 }*/
 
 // Peter Winzell ADDITIONS for serializing to string
+
+template <typename Object>
+[[nodiscard]] const std::string SerialToString(const Object& object){
+    return lbcrypto::Serial::SerializeToString(object.GetRef());
+}
+
+template <typename Object>
+void DeserializeFromString(Object& object,const std::string& json){
+    lbcrypto::Serial::DeserializeFromString(object.GetRef(),json);
+}
+
+
 void DCRTPolyDeserializePublicKeyFromString(
     PublicKeyDCRTPoly& publicKey,const std::string& json)
 {

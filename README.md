@@ -1,3 +1,11 @@
+# This is clone of the OpenFHE-rs wrapper.
+Currently an issue with the serialization to file with the latest release of openfhe.
+Its commented out currently in ***SerialDeserial.cc*** . Functions to serialize to string for pkey, cipher 
+text and evaluation keys for multiplication of real numbers are added - ***SerialDesrial.cc, SerialDesrial.h***
+and the rust bridge in ***lib.rs***
+
+Peter Winzell.
+
 # About OpenFHE-rs
 
 ☀️ *OpenFHE-rs is a joint project by [FairMath](https://fairmath.xyz/) & [OpenFHE](https://www.openfhe.org/).*
